@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DefaultOptions, UseMutationOptions } from "react-query";
 
 export const queryConfig = {

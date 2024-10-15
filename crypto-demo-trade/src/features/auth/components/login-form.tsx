@@ -10,10 +10,16 @@ import {
   FormMessage,
 } from "@/components/ui/form/form";
 import { Input } from "@/components/ui/form/input";
-import { useForm } from "react-hook-form";
+import { LoginInput } from "@/types/auth";
+import { Controller, useForm } from "react-hook-form";
 
 export const LoginForm = () => {
-  const form = useForm();
+  const form = useForm<LoginInput>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
   const onSubmit = () => {
     console.log("submit!");
@@ -21,10 +27,10 @@ export const LoginForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
+        <Controller
           control={form.control}
           name="email"
-          render={({ field }) => (
+          render={({ field: { ...field } }) => (
             <FormItem>
               <FormLabel>メールアドレス</FormLabel>
               <FormControl>
@@ -37,7 +43,7 @@ export const LoginForm = () => {
         <FormField
           control={form.control}
           name="password"
-          render={({ field }) => (
+          render={({ field: { ...field } }) => (
             <FormItem>
               <FormLabel>パスワード</FormLabel>
               <FormControl>
